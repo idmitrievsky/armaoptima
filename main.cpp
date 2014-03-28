@@ -12,7 +12,8 @@
 
 int main(int argc, const char * argv[])
 {
-    arma::vec coeffs = {1, 1, 1, 1, 1};
+    arma::vec coeffs;
+    coeffs.load(ROOT + "obj.mat", arma::arma_ascii);
     LOG(obj(2, 2, &coeffs));
     
     return 0;
