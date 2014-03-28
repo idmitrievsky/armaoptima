@@ -7,9 +7,13 @@
 //
 
 #include <iostream>
+#include "util.h"
+#include "multidim.h"
 
 int main(int argc, const char * argv[])
 {
+    arma::vec coeffs = {1, 1, 1, 1, 1};
+    LOG(obj(2, 2, &coeffs));
+    
     return 0;
 }
-
