@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Ivan Dmitrievsky. All rights reserved.
 //
 
-#include <iostream>
 #include "util.h"
 #include "multidim.h"
 

@@ -9,6 +9,7 @@
 #ifndef armaoptima_util_h
 #define armaoptima_util_h
 
+#include <iostream>
 #include <string>
 #include <cmath>
 
