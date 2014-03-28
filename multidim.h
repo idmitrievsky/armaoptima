@@ -13,7 +13,7 @@
 #include "armadillo"
 
 void init_obj(arma::vec const &obj_coeffs);
-double obj_val(double x, double y);
-arma::vec obj_grad_val(double x, double y);
+double obj_val(arma::vec arg);
+arma::vec obj_grad_val(arma::vec arg);
 
 #endif /* defined(__armaoptima__multidim__) */
