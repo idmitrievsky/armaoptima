@@ -55,3 +55,37 @@ arma::vec obj_grad_val(double x, double y)
 {
     return obj_grad_val(arma::vec({x, y}));
 }
+
+arma::vec grad_frac_step(arma::vec start, double lambda, double eps, double precision)
+{
+    ASSERT(start.n_elem == 2, "Start point must be from E2");
+    ASSERT(0 < lambda && lambda < 1, "Lambda must be a positive less than one.");
+    ASSERT(0 < eps && eps < 1, "Epsilon must be a positive less than one.");
+    
+    arma::vec point(start);
+    
+    for(;;)
+    {
+        auto grad_val = obj_grad_val(point);
+        auto grad_norm = arma::norm(grad_val);
+        double step = 1;
+        
+        if (almost_zero(grad_norm, precision))
+            break;
+        
+        arma::vec next_point;
+        for (;;)
+        {
+            next_point = point - step * grad_val;
+            
+            auto obj_diff = obj_val(next_point) - obj_val(point);
+            auto bound = -eps * step * grad_norm * grad_norm;
+            if (obj_diff < bound || almost_equal(obj_diff, bound, precision))
+                break;
+            
+            step *= lambda;
+        }
+        point = next_point;
+    }
+    return point;
+}
