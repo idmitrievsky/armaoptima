@@ -24,7 +24,7 @@
     #define LOG(message) \
         do { \
             auto val = message; \
-            std::cout << #message << " = " << val << std::endl; \
+            std::cout << #message << " =" << std::endl << val << std::endl; \
         } while (false)
 #else
     #define ASSERT(condition, message) do { } while (false)
