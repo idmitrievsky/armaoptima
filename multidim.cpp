@@ -35,6 +35,11 @@ double obj_val(arma::vec arg)
     return arma::dot(obj_coeffs, args);
 }
 
+double obj_val(double x, double y)
+{
+    return obj_val(arma::vec({x, y}));
+}
+
 arma::vec obj_grad_val(arma::vec arg)
 {
     ASSERT(obj_inited, "Objective function wasn't inited.");
@@ -44,4 +49,9 @@ arma::vec obj_grad_val(arma::vec arg)
     arma::vec args = {x, y, 1};
     
     return obj_grad_coeffs * args;
+}
+
+arma::vec obj_grad_val(double x, double y)
+{
+    return obj_grad_val(arma::vec({x, y}));
 }
