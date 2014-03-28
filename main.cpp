@@ -15,8 +15,9 @@ int main(int argc, const char * argv[])
     coeffs.load(ROOT + "obj.mat", arma::arma_ascii);
     init_obj(coeffs);
     
-    LOG(obj_val(2, 2));
-    LOG(obj_grad_val(1/2.0, 3));
+    auto min_point = grad_descent(obj_val, obj_grad_val, arma::vec({20, -10}), 0.01);
+    LOG(min_point);
+    LOG(obj_val(min_point));
     
     return 0;
 }
