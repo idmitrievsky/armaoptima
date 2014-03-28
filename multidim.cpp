@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Ivan Dmitrievsky. All rights reserved.
 //
 
-#include "util.h"
 #include "multidim.h"
 
 static arma::vec obj_coeffs(5, arma::fill::zeros);
