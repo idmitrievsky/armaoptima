@@ -34,6 +34,7 @@
 #endif
 
 #define ROOT std::string("/Users/ivan/.supp/code/armaoptima/armaoptima/")
+#define TRUE_ZEROS
 #define DEFAULT_PRECISION 0.01
 
 inline bool almost_equal(double a, double b, double precision = DEFAULT_PRECISION)

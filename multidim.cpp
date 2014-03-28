@@ -85,5 +85,10 @@ arma::vec grad_frac_step(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::v
         }
         point = next_point;
     }
+    
+#ifdef TRUE_ZEROS
+    point.transform([precision](double val){ return almost_zero(val, precision) ? 0 : val; });
+#endif
+    
     return point;
 }
