@@ -24,4 +24,7 @@ arma::vec obj_grad_val(double x, double y);
 arma::vec grad_frac_step(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::vec),
                          arma::vec start, double lambda, double eps, double precision = DEFAULT_PRECISION);
 
+arma::vec grad_descent(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::vec),
+                       arma::vec start, double precision = DEFAULT_PRECISION);
+
 #endif /* defined(__armaoptima__multidim__) */

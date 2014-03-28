@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Ivan Dmitrievsky. All rights reserved.
 //
 
+#include "onedim.h"
 #include "multidim.h"
 
 static arma::vec obj_coeffs(5, arma::fill::zeros);
@@ -84,6 +85,30 @@ arma::vec grad_frac_step(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::v
             step *= lambda;
         }
         point = next_point;
+    }
+    
+#ifdef TRUE_ZEROS
+    point.transform([precision](double val){ return almost_zero(val, precision) ? 0 : val; });
+#endif
+    
+    return point;
+}
+
+arma::vec grad_descent(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::vec), arma::vec start, double precision)
+{
+    arma::vec point(start);
+    
+    for(;;)
+    {
+        auto grad_val = obj_grad(point);
+        auto grad_norm = arma::norm(grad_val);
+        
+        if (almost_zero(grad_norm, precision))
+            break;
+        
+        double step = gss([&](double _step){ return obj(point - _step * grad_val); }, 0, 1, precision);
+
+        point = point - step * grad_val;
     }
     
 #ifdef TRUE_ZEROS
