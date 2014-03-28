@@ -14,7 +14,10 @@ int main(int argc, const char * argv[])
 {
     arma::vec coeffs;
     coeffs.load(ROOT + "obj.mat", arma::arma_ascii);
-    LOG(obj(2, 2, &coeffs));
+    init_obj(coeffs);
+    
+    LOG(obj_val(2, 2));
+    LOG(obj_grad_val(1/2.0, 3));
     
     return 0;
 }

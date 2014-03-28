@@ -12,6 +12,8 @@
 #define  ARMA_DONT_USE_WRAPPER
 #include "armadillo"
 
-double obj(double x, double y, arma::vec const *_coeffs = 0);
+void init_obj(arma::vec const &obj_coeffs);
+double obj_val(double x, double y);
+arma::vec obj_grad_val(double x, double y);
 
 #endif /* defined(__armaoptima__multidim__) */
