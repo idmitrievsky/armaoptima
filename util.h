@@ -10,6 +10,7 @@
 #define armaoptima_util_h
 
 #include <string>
+#include <cmath>
 
 #ifndef NDEBUG
     #define ASSERT(condition, message) \
@@ -32,5 +33,30 @@
 #endif
 
 #define ROOT std::string("/Users/ivan/.supp/code/armaoptima/armaoptima/")
+#define DEFAULT_PRECISION 0.01
+
+inline bool almost_equal(double a, double b, double precision = DEFAULT_PRECISION)
+{
+    if (std::isnan(a) || std::isnan(b))
+        return false;
+    
+    if (std::fabs(a - b) < precision)
+        return true;
+    
+    return false;
+}
+
+inline bool almost_zero(double val, double precision = DEFAULT_PRECISION)
+{
+    return almost_equal(val, 0, precision);
+}
+
+inline short int sign(double val, double precision = DEFAULT_PRECISION)
+{
+    if (almost_equal(val, 0, precision))
+        return 0;
+    
+    return std::signbit(val) ? -1 : 1;
+}
 
 #endif
