@@ -9,6 +9,8 @@
 #ifndef armaoptima_util_h
 #define armaoptima_util_h
 
+#include <string>
+
 #ifndef NDEBUG
     #define ASSERT(condition, message) \
         do { \
@@ -28,5 +30,7 @@
     #define ASSERT(condition, message) do { } while (false)
     #define LOG(message) do { } while (false)
 #endif
+
+#define ROOT std::string("/Users/ivan/.supp/code/armaoptima/armaoptima/")
 
 #endif
