@@ -12,14 +12,14 @@
 
 int main(int argc, const char * argv[])
 {
-    unsigned i = 0;
+    unsigned calls = 0;
     auto obj = [](double arg){ return std::sqrt(1 + arg * arg) + std::exp(-2*arg); };
     
-    LOG(gss(obj, 0, 1, 0.00000001, &i));
-    LOG(i);
-    i = 0;
-    LOG(fib(obj, 0, 1, 0.00000001, &i));
-    LOG(i);
+    LOG(gss(obj, 0, 1, 0.00000001, &calls));
+    LOG(calls);
+    calls = 0;
+    LOG(fib(obj, 0, 1, 0.00000001, &calls));
+    LOG(calls);
     
     return 0;
 }
