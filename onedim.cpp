@@ -8,7 +8,6 @@
 
 #include <vector>
 #include <cmath>
-#include "util.h"
 #include "onedim.h"
 
 static std::vector<unsigned> fib(int n)
