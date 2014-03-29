@@ -15,9 +15,9 @@
 typedef std::function<double (double)> one_dim_fun;
 
 double general_partition(one_dim_fun obj, double segment_begin, double segment_end, double precision, double proportion = DEFAULT_PRECISION,
-                         unsigned *iters = 0);
+                         unsigned *calls = 0);
 
-double gss(one_dim_fun obj, double segment_begin, double segment_end, double precision = DEFAULT_PRECISION, unsigned *iters = 0);
-double fib(one_dim_fun obj, double segment_begin, double segment_end, double precision = DEFAULT_PRECISION, unsigned *iters = 0);
+double gss(one_dim_fun obj, double segment_begin, double segment_end, double precision = DEFAULT_PRECISION, unsigned *calls = 0);
+double fib(one_dim_fun obj, double segment_begin, double segment_end, double precision = DEFAULT_PRECISION, unsigned *calls = 0);
 
 #endif /* defined(__armaoptima__onedim__) */
