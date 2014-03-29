@@ -6,9 +6,27 @@
 //  Copyright (c) 2014 Ivan Dmitrievsky. All rights reserved.
 //
 
+#include <vector>
 #include <cmath>
 #include "util.h"
 #include "onedim.h"
+
+static std::vector<unsigned> fib(int n)
+{
+    ASSERT(n > 0, "Number of fib nums must be positive.");
+    
+    std::vector<unsigned> fibs(n);
+    fibs[0] = 0; fibs[1] = 1;
+    int m = n - 2;
+    
+    while (m > 0)
+    {
+        fibs[n - m] = fibs[n - m - 1] + fibs[n - m - 2];
+        m--;
+    }
+    
+    return fibs;
+}
 
 double gss(std::function<double (double)> obj, double segment_begin, double segment_end, double precision)
 {
