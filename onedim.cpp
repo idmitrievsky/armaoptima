@@ -25,17 +25,15 @@ static std::vector<unsigned> fib(std::function<bool (unsigned)> predicate)
     return fibs;
 }
 
-double gss(std::function<double (double)> obj, double segment_begin, double segment_end, double precision)
+double general_partition(one_dim_fun obj, double segment_begin, double segment_end, double precision, double proportion, unsigned *iters)
 {
     ASSERT(segment_end > segment_begin, "Segment length must be positive.");
     
-    double proportion  = (3 - std::sqrt(5)) / 2;
     double left_bound  = segment_begin, right_bound = segment_end;
     double left_probe  = left_bound + proportion * (right_bound - left_bound);
     double right_probe = left_bound + right_bound - left_probe;
     double left_mean   = obj(left_probe);
     double right_mean  = obj(right_probe);
-    int iterations = 0;
     
     for (;;)
     {
@@ -58,8 +56,21 @@ double gss(std::function<double (double)> obj, double segment_begin, double segm
             right_probe = left_bound + right_bound - left_probe;
             right_mean  = obj(right_probe);
         }
-        iterations += 1;
+        *iters += 1;
     }
     
     return left_probe;
+}
+
+double gss(one_dim_fun obj, double segment_begin, double segment_end, double precision, unsigned *iters)
+{
+    double proportion = (3 - std::sqrt(5)) / 2;
+    return general_partition(obj, segment_begin, segment_end, precision, proportion, iters);
+}
+
+double fib(one_dim_fun obj, double segment_begin, double segment_end, double precision, unsigned *iters)
+{
+    auto fibs = fib([=](unsigned f){ return (segment_end - segment_begin) / f <= precision; });
+    double proportion = 1 - (double)fibs[0] / fibs[1];
+    return general_partition(obj, segment_begin, segment_end, precision, proportion, iters);
 }
