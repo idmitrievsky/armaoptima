@@ -6,18 +6,20 @@
 //  Copyright (c) 2014 Ivan Dmitrievsky. All rights reserved.
 //
 
+#include <cmath>
 #include "util.h"
-#include "multidim.h"
+#include "onedim.h"
 
 int main(int argc, const char * argv[])
 {
-    arma::vec coeffs;
-    coeffs.load(ROOT + "obj.mat", arma::arma_ascii);
-    init_obj(coeffs);
+    unsigned i = 0;
+    auto obj = [](double arg){ return std::sqrt(1 + arg * arg) + std::exp(-2*arg); };
     
-    auto min_point = grad_descent(obj_val, obj_grad_val, arma::vec({20, -10}), 0.01);
-    LOG(min_point);
-    LOG(obj_val(min_point));
+    LOG(gss(obj, 0, 1, 0.00000001, &i));
+    LOG(i);
+    i = 0;
+    LOG(fib(obj, 0, 1, 0.00000001, &i));
+    LOG(i);
     
     return 0;
 }
