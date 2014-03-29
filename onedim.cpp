@@ -10,18 +10,16 @@
 #include <cmath>
 #include "onedim.h"
 
-static std::vector<unsigned> fib(int n)
+static std::vector<unsigned> fib(std::function<bool (unsigned)> predicate)
 {
-    ASSERT(n > 0, "Number of fib nums must be positive.");
-    
-    std::vector<unsigned> fibs(n);
+    std::vector<unsigned> fibs(2);
     fibs[0] = 0; fibs[1] = 1;
-    int m = n - 2;
     
-    while (m > 0)
+    while (!predicate(fibs.back()))
     {
-        fibs[n - m] = fibs[n - m - 1] + fibs[n - m - 2];
-        m--;
+        auto temp = fibs[0];
+        fibs[0] = fibs[1];
+        fibs[1] += temp;
     }
     
     return fibs;
