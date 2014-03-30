@@ -34,6 +34,7 @@ double general_shrink(one_dim_fun obj, double segment_begin, double segment_end,
     double right_probe = left_bound + right_bound - left_probe;
     double left_mean   = obj(left_probe);
     double right_mean  = obj(right_probe);
+    unsigned _calls = 2;
     
     for (;;)
     {
@@ -56,8 +57,9 @@ double general_shrink(one_dim_fun obj, double segment_begin, double segment_end,
             right_probe = left_bound + right_bound - left_probe;
             right_mean  = obj(right_probe);
         }
-        *calls += 1;
+        _calls += 1;
     }
+    if (calls) *calls = _calls;
     
     return left_probe;
 }
