@@ -70,7 +70,7 @@ double gss(one_dim_fun obj, double segment_begin, double segment_end, double pre
 
 double fib(one_dim_fun obj, double segment_begin, double segment_end, double precision, unsigned *calls)
 {
-    auto fibs = fib([=](unsigned f){ return (segment_end - segment_begin) / f <= precision; });
     double proportion = 1 - (double)fibs[0] / fibs[1];
+    auto fibs = fib([=](unsigned F){ return (segment_end - segment_begin) / F <= precision; });
     return general_shrink(obj, segment_begin, segment_end, precision, proportion, calls);
 }
