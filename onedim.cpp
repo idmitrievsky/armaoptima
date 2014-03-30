@@ -25,7 +25,7 @@ static std::vector<unsigned> fib(std::function<bool (unsigned)> predicate)
     return fibs;
 }
 
-double general_partition(one_dim_fun obj, double segment_begin, double segment_end, double precision, double proportion, unsigned *calls)
+double general_shrink(one_dim_fun obj, double segment_begin, double segment_end, double precision, double proportion, unsigned *calls)
 {
     ASSERT(segment_end > segment_begin, "Segment length must be positive.");
     
@@ -65,12 +65,12 @@ double general_partition(one_dim_fun obj, double segment_begin, double segment_e
 double gss(one_dim_fun obj, double segment_begin, double segment_end, double precision, unsigned *calls)
 {
     double proportion = (3 - std::sqrt(5)) / 2;
-    return general_partition(obj, segment_begin, segment_end, precision, proportion, calls);
+    return general_shrink(obj, segment_begin, segment_end, precision, proportion, calls);
 }
 
 double fib(one_dim_fun obj, double segment_begin, double segment_end, double precision, unsigned *calls)
 {
     auto fibs = fib([=](unsigned f){ return (segment_end - segment_begin) / f <= precision; });
     double proportion = 1 - (double)fibs[0] / fibs[1];
-    return general_partition(obj, segment_begin, segment_end, precision, proportion, calls);
+    return general_shrink(obj, segment_begin, segment_end, precision, proportion, calls);
 }
