@@ -67,9 +67,10 @@ arma::vec grad_frac_step(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::v
     {
         auto grad_val = obj_grad(point);
         auto grad_norm = arma::norm(grad_val);
+        auto grad_norm_square = grad_norm * grad_norm;
         double step = 1;
         
-        if (almost_zero(grad_norm, precision))
+        if (grad_norm_square < precision || almost_zero(grad_norm_square, precision))
             break;
         
         arma::vec next_point;
@@ -102,8 +103,9 @@ arma::vec grad_descent(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::vec
     {
         auto grad_val = obj_grad(point);
         auto grad_norm = arma::norm(grad_val);
+        auto grad_norm_square = grad_norm * grad_norm;
         
-        if (almost_zero(grad_norm, precision))
+        if (grad_norm_square < precision || almost_zero(grad_norm_square, precision))
             break;
         
         double step = gss([&](double _step){ return obj(point - _step * grad_val); }, 0, 1, precision);
