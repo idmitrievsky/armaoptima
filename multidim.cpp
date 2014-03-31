@@ -63,8 +63,8 @@ arma::mat obj_hess_val(arma::vec arg)
     
     arma::mat hess_val;
     
-    hess_val << 2 << 4  << arma::endr
-             << 4 << 12 << arma::endr;
+    hess_val << 2 * obj_coeffs(0) << obj_coeffs(1) << arma::endr
+             << obj_coeffs(1) << 2 * obj_coeffs(2) << arma::endr;
     
     return hess_val;
 }
