@@ -56,6 +56,24 @@ arma::vec obj_grad_val(double x, double y)
     return obj_grad_val(arma::vec({x, y}));
 }
 
+arma::mat obj_hess_val(arma::vec arg)
+{
+    ASSERT(obj_inited, "Objective function wasn't inited.");
+    ASSERT(arg.n_elem == 2, "Point must be from E2");
+    
+    arma::mat hess_val;
+    
+    hess_val << 2 << 4  << arma::endr
+             << 4 << 12 << arma::endr;
+    
+    return hess_val;
+}
+
+arma::mat obj_hess_val(double x, double y)
+{
+    return obj_hess_val(arma::vec({x, y}));
+}
+
 arma::vec grad_frac_step(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::vec), arma::vec start, double lambda, double eps, double precision)
 {
     ASSERT(0 < lambda && lambda < 1, "Lambda must be a positive less than one.");
