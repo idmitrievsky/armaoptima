@@ -12,6 +12,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <vector>
 
 #ifndef NDEBUG
     #define ASSERT(condition, message) \
@@ -60,4 +61,13 @@ inline short int sign(double val, double precision)
     return std::signbit(val) ? -1 : 1;
 }
 
+template <typename T>
+void print(std::vector<T> vector, char sep = ' ')
+{
+    for (auto &item : vector)
+    {
+        std::cout << item << sep;
+    }
+    std::cout << std::endl;
+}
 #endif
