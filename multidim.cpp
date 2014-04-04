@@ -83,8 +83,8 @@ arma::vec grad_frac_step(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::v
     
     for(;;)
     {
-        auto grad_val = obj_grad(point);
-        auto grad_norm = arma::norm(grad_val);
+        arma::vec grad_val = obj_grad(point);
+        double grad_norm = arma::norm(grad_val);
         double step = 1;
         
         if (grad_norm < precision)
@@ -118,9 +118,9 @@ arma::vec grad_descent(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::vec
     
     for(;;)
     {
-        auto grad_val = obj_grad(point);
-        auto grad_norm = arma::norm(grad_val);
-        auto hess_val_inv = obj_hess_val(point).i().eval();
+        arma::vec grad_val = obj_grad(point);
+        double grad_norm = arma::norm(grad_val);
+        arma::mat hess_val_inv = obj_hess_val(point).i().eval();
         
         if (grad_norm < precision)
             break;
