@@ -35,9 +35,8 @@
 
 #define ROOT std::string("/Users/ivan/.supp/code/armaoptima/armaoptima/")
 #define TRUE_ZEROS
-#define DEFAULT_PRECISION 0.01
 
-inline bool almost_equal(double a, double b, double precision = DEFAULT_PRECISION)
+inline bool almost_equal(double a, double b, double precision)
 {
     if (std::isnan(a) || std::isnan(b))
         return false;
@@ -48,12 +47,12 @@ inline bool almost_equal(double a, double b, double precision = DEFAULT_PRECISIO
     return false;
 }
 
-inline bool almost_zero(double val, double precision = DEFAULT_PRECISION)
+inline bool almost_zero(double val, double precision)
 {
     return almost_equal(val, 0, precision);
 }
 
-inline short int sign(double val, double precision = DEFAULT_PRECISION)
+inline short int sign(double val, double precision)
 {
     if (almost_equal(val, 0, precision))
         return 0;

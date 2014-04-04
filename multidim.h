@@ -25,9 +25,9 @@ arma::mat obj_hess_val(arma::vec arg);
 arma::mat obj_hess_val(double x, double y);
 
 arma::vec grad_frac_step(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::vec),
-                         arma::vec start, double lambda, double eps, double precision = DEFAULT_PRECISION);
+                         arma::vec start, double lambda, double eps, double precision);
 
 arma::vec grad_descent(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::vec), arma::mat (*obj_hess)(arma::vec),
-                       arma::vec start, double precision = DEFAULT_PRECISION);
+                       arma::vec start, double precision);
 
 #endif /* defined(__armaoptima__multidim__) */
