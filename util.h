@@ -70,4 +70,10 @@ void print(std::vector<T> vector, char sep = ' ')
     }
     std::cout << std::endl;
 }
+
+inline double square(double value)
+{
+    return value * value;
+}
+
 #endif
