@@ -120,9 +120,10 @@ arma::vec grad_descent(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::vec
     {
         arma::vec grad_val = obj_grad(point);
         double grad_norm = arma::norm(grad_val);
+        double grad_norm_square = grad_norm * grad_norm;
         arma::mat hess_val_inv = obj_hess_val(point).i().eval();
         
-        if (grad_norm < precision)
+        if (grad_norm_square < precision)
             break;
         
         double step = gss([&](double _step){ return obj(point - _step * hess_val_inv *  grad_val); }, 0, 1, precision);
