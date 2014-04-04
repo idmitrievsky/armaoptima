@@ -74,7 +74,7 @@ arma::mat obj_hess_val(double x, double y)
     return obj_hess_val(arma::vec({x, y}));
 }
 
-arma::vec grad_frac_step(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::vec), arma::vec start, double lambda, double eps, double precision)
+arma::vec grad_frac_step(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::vec), arma::vec start, double lambda, double eps, double precision, vec_seq *point_sequence)
 {
     ASSERT(0 < lambda && lambda < 1, "Lambda must be a positive less than one.");
     ASSERT(0 < eps && eps < 1, "Epsilon must be a positive less than one.");
@@ -86,6 +86,9 @@ arma::vec grad_frac_step(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::v
         arma::vec grad_val = obj_grad(point);
         double grad_norm = arma::norm(grad_val);
         double step = 1;
+        
+        if (point_sequence)
+            point_sequence->push_back(point);
         
         if (grad_norm < precision)
             break;

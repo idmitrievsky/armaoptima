@@ -13,6 +13,8 @@
 #include "armadillo"
 #include "util.h"
 
+typedef std::vector<arma::vec> vec_seq;
+
 void init_obj(arma::vec const &obj_coeffs);
 
 double obj_val(arma::vec arg);
@@ -25,7 +27,7 @@ arma::mat obj_hess_val(arma::vec arg);
 arma::mat obj_hess_val(double x, double y);
 
 arma::vec grad_frac_step(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::vec),
-                         arma::vec start, double lambda, double eps, double precision);
+                         arma::vec start, double lambda, double eps, double precision, vec_seq *point_sequence = 0);
 
 arma::vec grad_descent(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::vec), arma::mat (*obj_hess)(arma::vec),
                        arma::vec start, double precision);
