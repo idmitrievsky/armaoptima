@@ -11,7 +11,7 @@
 
 static arma::vec obj_coeffs(5, arma::fill::zeros);
 static arma::mat obj_grad_coeffs(2, 3, arma::fill::zeros);
-static bool obj_inited = false;
+bool obj_inited = false;
 
 void init_obj(arma::vec const &_obj_coeffs)
 {
