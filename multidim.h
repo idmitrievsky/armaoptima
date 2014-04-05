@@ -30,6 +30,6 @@ arma::vec grad_frac_step(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::v
                          arma::vec start, double lambda, double eps, double precision, vec_seq *point_sequence = 0);
 
 arma::vec grad_descent(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::vec), arma::mat (*obj_hess)(arma::vec),
-                       arma::vec start, double precision, vec_seq *direction_sequence = 0);
+                       arma::vec start, double precision);
 
 #endif /* defined(__armaoptima__multidim__) */

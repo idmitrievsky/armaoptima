@@ -122,7 +122,7 @@ arma::vec grad_frac_step(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::v
     return point;
 }
 
-arma::vec grad_descent(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::vec), arma::mat (*obj_hess)(arma::vec), arma::vec start, double precision, vec_seq *direction_sequence)
+arma::vec grad_descent(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::vec), arma::mat (*obj_hess)(arma::vec), arma::vec start, double precision)
 {
     arma::vec point(start);
     
@@ -137,11 +137,6 @@ arma::vec grad_descent(double (*obj)(arma::vec), arma::vec (*obj_grad)(arma::vec
         
         arma::mat hess_val_inv = obj_hess_val(point).i().eval();
         arma::vec direction = hess_val_inv *  grad_val;
-        
-        if (direction_sequence)
-        {
-            direction_sequence->push_back(direction);
-        }
         
         double step = gss([&](double _step){ return obj(point - _step * direction); }, 0, 1, precision);
 
